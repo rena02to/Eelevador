@@ -82,8 +82,7 @@ def organiza_req(requisicoes_tunel1, requisicoes_tunel3):
                         auxiliar3 = auxiliar3 - 1
             auxiliar = auxiliar + 1
     
-    return (requisicoes_tunel1, requisicoes_tunel3)
-    
+    return (requisicoes_tunel1, requisicoes_tunel3) 
 
 def main():
     print("\n===================================\nBem vindo ao sistema de elevadores!\n===================================\n")
@@ -93,25 +92,44 @@ def main():
     #tuneis descendo
     requisicoes_tunel3 = []
     
+    #andares atuais do elevador
+    elevador_c = -2
+    elevador_b = -1
+    elevador_a = 0 
+    
+    #contadores de energia e tempo de espera
+    cont_energ = 0
+    cont_t = 0
+    
+    contador = 0
+    contador2 = 0
+    
     #primeira entrada
     requisicoes = organiza_req(requisicoes_tunel1, requisicoes_tunel3)
     while requisicoes != None:
         if requisition() == True:
             requisicoes = organiza_req(requisicoes_tunel1, requisicoes_tunel3)
-        print(requisicoes)
-    
-    #andares atuais do elevador
-    elevador_a = -2
-    elevador_b = -1
-    elevador_c = 0
-
-    #contadores de energia e tempo de espera
-    cont_energ = None
-    cont_t = None
-    
-    #atende as requisicoes
-    #while requisicoes_tunel1 != [] and requisicoes_tunel2 != [] and requisicoes_tunel3 != [] and requisicoes_tunel4 != []:
+        contador = 0
+        os.system("cls")
+        for teste in requisicoes[0]:
+            if teste[0] < elevador_a:
+                requisicoes[0][contador] = (requisicoes[0][contador][0] + 1, requisicoes[0][contador][1])
+            contador = contador + 1
         
-    
+        for teste in requisicoes[0]:
+            if teste[0] == teste[1]:
+                print("Porta aberta!")
+                requisicoes[0].pop()
+        
+        if requisicoes == ([], []):
+            print("Requisicoes atendidas!")
+            break
+        
+        cont_energ = cont_energ + 1
+        cont_t = cont_t + 1
+        print(f"Gasto energetico: {cont_energ}\nTempo: {cont_t}\nAndar atual do elevador: {elevador_a}")
+        elevador_a = elevador_a + 1
+        contador2 = contador2 + 1
+        print(requisicoes)
 
 main()
