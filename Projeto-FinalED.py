@@ -99,6 +99,7 @@ def mover_elevador(req):
  
     print(f"{elevador.nome} indo de {elevador.andar} para {andar} buscar um cliente")
     gasto = elevador.distance(andar)
+    print(f"O Elevador mais próximo é o {elevador.nome}, com um distância de {gasto} andares")
     elevador.andar = andar
     gasto += elevador.distance(destino)
     if t.conflito(destino, elevador):
