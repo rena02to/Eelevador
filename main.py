@@ -83,6 +83,10 @@ def ler_entrada():
     try:
         atual = int(input('Em qual piso você está?'))
         destino = int(input('Para qual piso você deseja ir?'))
+        if atual > 300 or destino > 300 or atual < 1 or destino < 0:
+            print("Erro: Tente novamente")
+            ler_entrada()
+        
         return (atual, destino)
     except:
         print("Erro: Tente novamente")
@@ -99,7 +103,7 @@ def mover_elevador(req):
  
     print(f"{elevador.nome} indo de {elevador.andar} para {andar} buscar um cliente")
     gasto = elevador.distance(andar)
-    print(f"O Elevador mais próximo é o {elevador.nome}, com um distância de {gasto} andares")
+    print(f"O Elevador mais próximo é o {elevador.nome}, com um distância de {gasto} andares, logo o tempo de espera e: {gasto}")
     elevador.andar = andar
     gasto += elevador.distance(destino)
     if t.conflito(destino, elevador):
